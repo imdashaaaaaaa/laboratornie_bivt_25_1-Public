@@ -1,8 +1,8 @@
 Лабораторная №1
 
 Задание 1
-name=input("Имя: ")
-age=int(input("Возраст: "))
+name=input("Имя: ") 
+age=int(input("Возраст: ")) 
 print("Привет, ", name, "! Через год тебе будет ", age+1, ".", sep="")
 
 ![ex01](https://github.com/user-attachments/assets/ecebae4d-c888-4c35-8e54-02ee1a0388e5)
