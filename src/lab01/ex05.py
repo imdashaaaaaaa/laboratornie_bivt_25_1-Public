@@ -7,4 +7,4 @@ for i in range (3):
     len_full_name+=len(parts_name[i])
     initials+=parts_name[i][0].upper()
 print("Инициалы:", initials)
-print("Длина (символов):", len_full_name)
+print("Длина (символов):", len_full_name+2)
