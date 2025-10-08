@@ -60,3 +60,7 @@ print("Длина (символов):", len_full_name+2)
 ```
 ![ex05](https://github.com/user-attachments/assets/6e9bacbb-c4a1-4ba2-bdd9-e3f6565d81d2)
 
+
+
+## Лабораторная №2
+
