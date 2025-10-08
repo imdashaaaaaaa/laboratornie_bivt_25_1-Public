@@ -15,8 +15,8 @@ def flatten(mat: list[list | tuple]) -> list:
     return array
 
 
-#print(min_max([3, -1, 5, 5, 0]), min_max([42]), min_max([-5,-2,-9]), min_max([]), min_max([1.5,2,2.0,-3.1])) #Тест-кейсы min_max
+print(min_max([3, -1, 5, 5, 0]), min_max([42]), min_max([-5,-2,-9]), min_max([]), min_max([1.5,2,2.0,-3.1])) #Тест-кейсы min_max
 
-#print(unique_sorted([3,1,2,1,3]), unique_sorted([]), unique_sorted([-1,-1,0,2,2]), unique_sorted([1.0, 1, 2.5, 2.5, 0])) #Тест-кейсы unique_sorted
+print(unique_sorted([3,1,2,1,3]), unique_sorted([]), unique_sorted([-1,-1,0,2,2]), unique_sorted([1.0, 1, 2.5, 2.5, 0])) #Тест-кейсы unique_sorted
 
-#print(flatten([[1,2],[3,4]]), flatten([[1,2],(3,4,5)]), flatten([[1],[],[2,3]]), flatten([[1,2],"ab"])) #Тест-кейс flatten
+print(flatten([[1,2],[3,4]]), flatten([[1,2],(3,4,5)]), flatten([[1],[],[2,3]]), flatten([[1,2],"ab"])) #Тест-кейс flatten
