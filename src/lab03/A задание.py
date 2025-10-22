@@ -85,3 +85,4 @@ if __name__ == "__main__":
     freq2 = count_freq(tokens2)
     print(freq2)  # {"aa":2,"bb":2,"cc":1}
     print(top_n(freq2, 2))  # [("aa",2), ("bb",2)]
+    
