@@ -87,7 +87,8 @@ print(unique_sorted([3,1,2,1,3]), unique_sorted([]), unique_sorted([-1,-1,0,2,2]
 
 print(flatten([[1,2],[3,4]]), flatten([[1,2],(3,4,5)]), flatten([[1],[],[2,3]]), flatten([[1,2],"ab"])) #Тест-кейс flatten
 ```
-https://github.com/imdashaaaaaaa/laboratornie_bivt_25_1-Public/blob/main/images/lab02/arrays_ph.png
+<img width="1511" height="781" alt="arrays_ph" src="https://github.com/user-attachments/assets/7fa267aa-95b7-40ca-abd8-d10b441e7b18" />
+
 
 ### Задание 2 (matrix)
 ```python
