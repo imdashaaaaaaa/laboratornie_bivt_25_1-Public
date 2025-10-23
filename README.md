@@ -138,6 +138,8 @@ def col_sums(mat: list[list[float | int]]) -> list[float]:
 
 print(col_sums([[1,2,3], [4,5,6]]), col_sums([[-1,1], [10,-10]]), col_sums([[0,0], [0,0]]), col_sums([[1,2], [3]])) #Тест-кейс col_sums
 ```
+<img width="1507" height="652" alt="image" src="https://github.com/user-attachments/assets/2644952f-b11a-4b7c-bf9f-9bd36039964f" />
+
 
 ### Задание 3 (tuples)
 ```python
@@ -164,3 +166,4 @@ print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
 print(format_record((" К ", "", 4.877)))
 print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.5689)))
 ```
+<img width="1189" height="837" alt="tuples_ph" src="https://github.com/user-attachments/assets/fefdf5d8-7d41-4e3a-b6ef-de20798b0564" />
