@@ -1,4 +1,4 @@
-<img width="1511" height="781" alt="Снимок экрана 2025-10-24 003339" src="https://github.com/user-attachments/assets/168b5c36-f12e-489e-83ca-3bd8cdf9c834" />## Лабораторная №1
+## Лабораторная №1
 
 ### Задание 1
 ```python
