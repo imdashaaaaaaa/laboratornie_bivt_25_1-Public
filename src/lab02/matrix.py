@@ -21,9 +21,6 @@ def transpose(mat: list[list[float | int]]) -> list[list]:
 
 print(transpose([[1, 2, 3]]), transpose([[1], [2], [3]]), transpose([[1, 2], [3,4]]), transpose([]), transpose([[1, 2], [3]])) #Тест-кейс transpose
 
-
-
-
 def row_sums(mat: list[list[float | int]]) -> list[float]:
     if is_valid_matr(mat)==False:
         return ValueError
@@ -35,7 +32,6 @@ def row_sums(mat: list[list[float | int]]) -> list[float]:
     return result
 
 print(row_sums([[1,2,3], [4,5,6]]), row_sums([[-1,1], [10,-10]]), row_sums([[0,0], [0,0]]), row_sums([[1,2], [3]])) #Тест-кейс row_sums
-
 
 def col_sums(mat: list[list[float | int]]) -> list[float]:
     if is_valid_matr(mat)==False:
