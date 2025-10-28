@@ -63,4 +63,107 @@ print("Длина (символов):", len_full_name+2)
 
 
 ## Лабораторная №2
+### Задание 1 (arrays)
+```python
+def min_max(nums:list[float | int]) -> tuple [float | int, float | int]:
+    if not nums: 
+        return ValueError 
+    return tuple((min(nums), max(nums)))
 
+def unique_sorted(nums: list[float|int]) -> list[float|int]:
+    return tuple(sorted(set(nums)))
+
+def flatten(mat: list[list | tuple]) -> list:
+    array=[]
+    for element in mat:
+         if not isinstance(element, (list, tuple)):
+             return TypeError
+         array.extend(element)
+    return array
+
+print(min_max([3, -1, 5, 5, 0]), min_max([42]), min_max([-5,-2,-9]), min_max([]), min_max([1.5,2,2.0,-3.1])) #Тест-кейсы min_max
+
+print(unique_sorted([3,1,2,1,3]), unique_sorted([]), unique_sorted([-1,-1,0,2,2]), unique_sorted([1.0, 1, 2.5, 2.5, 0])) #Тест-кейсы unique_sorted
+
+print(flatten([[1,2],[3,4]]), flatten([[1,2],(3,4,5)]), flatten([[1],[],[2,3]]), flatten([[1,2],"ab"])) #Тест-кейс flatten
+```
+<img width="1511" height="781" alt="arrays_ph" src="https://github.com/user-attachments/assets/7fa267aa-95b7-40ca-abd8-d10b441e7b18" />
+
+
+### Задание 2 (matrix)
+```python
+def is_valid_matr(mat: list[list[float | int]]) -> bool:
+    for i in range (len(mat)):
+        if len(mat[i])!=0 and len(mat[0])!=len(mat[i]):
+            return False
+    return True 
+
+def transpose(mat: list[list[float | int]]) -> list[list]:
+    if len(mat)==0:
+        return []
+    if is_valid_matr(mat)==False:
+        return ValueError
+
+    result = []
+    for columns in range (len(mat[0])):
+        new_row=[]
+        for row in range (len(mat)):
+            new_row.append(mat[row][columns])
+        result.append(new_row)
+
+    return result 
+
+print(transpose([[1, 2, 3]]), transpose([[1], [2], [3]]), transpose([[1, 2], [3,4]]), transpose([]), transpose([[1, 2], [3]])) #Тест-кейс transpose
+
+def row_sums(mat: list[list[float | int]]) -> list[float]:
+    if is_valid_matr(mat)==False:
+        return ValueError
+    
+    result=[]
+    for row in mat:
+        result.append(sum(row))
+
+    return result
+
+print(row_sums([[1,2,3], [4,5,6]]), row_sums([[-1,1], [10,-10]]), row_sums([[0,0], [0,0]]), row_sums([[1,2], [3]])) #Тест-кейс row_sums
+
+def col_sums(mat: list[list[float | int]]) -> list[float]:
+    if is_valid_matr(mat)==False:
+        return ValueError
+    
+    new_mat=(transpose(mat))
+    result=(row_sums(new_mat))
+
+    return result
+
+print(col_sums([[1,2,3], [4,5,6]]), col_sums([[-1,1], [10,-10]]), col_sums([[0,0], [0,0]]), col_sums([[1,2], [3]])) #Тест-кейс col_sums
+```
+<img width="1507" height="652" alt="image" src="https://github.com/user-attachments/assets/2644952f-b11a-4b7c-bf9f-9bd36039964f" />
+
+
+### Задание 3 (tuples)
+```python
+def format_record(rec: tuple[str, str, float]) -> str:
+    cleaned_fio=rec[0].strip().split()
+    surname=cleaned_fio[0][0].upper()
+    if len(cleaned_fio)==3:
+        form_fio=f"{surname}{cleaned_fio[0][1:]} {cleaned_fio[1][0].upper()}.{cleaned_fio[2][0].upper()}."
+    elif len(cleaned_fio)==2:
+        form_fio=f"{surname}{cleaned_fio[0][1:]} {cleaned_fio[1][0].upper()}."
+    else:
+        return ValueError
+    
+    group=rec[1].strip()
+    if not group:
+        return ValueError
+    
+    gpa=f"{float(rec[2]):.2f}"
+
+    return f"{form_fio}, гр. {group}, GPA {gpa}"
+
+print(format_record(("Иванов Иван Иванович", "BIVT-25", 4.6)))
+print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
+print(format_record((" К ", "", 4.877)))
+print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.5689)))
+```
+<img width="1189" height="837" alt="tuples_ph" src="https://github.com/user-attachments/assets/fefdf5d8-7d41-4e3a-b6ef-de20798b0564" />
