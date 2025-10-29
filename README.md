@@ -167,3 +167,84 @@ print(format_record((" К ", "", 4.877)))
 print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.5689)))
 ```
 <img width="1189" height="837" alt="tuples_ph" src="https://github.com/user-attachments/assets/fefdf5d8-7d41-4e3a-b6ef-de20798b0564" />
+
+## Лабораторная №3
+### Задание A (text.py)
+```python
+def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    if not text:
+        return ""
+    
+    result = text
+    if yo2e:
+        result = result.replace('ё', 'е').replace('Ё', 'Е')
+    
+    if casefold:
+        result = result.casefold()
+
+    for char in ['\t', '\r', '\n']:
+        result = result.replace(char, ' ')
+    
+    result = ' '.join(result.split())
+    
+    return result
+
+import re
+
+def tokenize(result: str) -> list[str]:
+
+    pattern =  r'\w+(?:-\w+)*'
+    tokens = re.findall(pattern, result)
+
+    return tokens
+
+
+def count_freq(tokens: list[str]) -> dict[str, int]:
+
+    count_words={}
+    for word in tokens:
+        count_words[word]=count_words.get(word, 0)+1 
+    
+    return count_words
+
+
+def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
+
+    sorted_items = sorted(freq.items(), key=lambda x: (x[0])) #по алфавиту
+    sorted_items = sorted(freq.items(), key=lambda x: (-x[1])) #по количеству в обратном порядке
+
+    return sorted_items[:n]
+
+if __name__ == "__main__":
+    print (normalize ("ПрИвЕт\nМИр\t"))
+    print (tokenize ("emoji 😀 не слово"))
+    print (top_n(count_freq(["a","b","a","c","b","a"]), n=2))
+```
+<img width="1030" height="771" alt="A" src="https://github.com/user-attachments/assets/53cda335-dcc1-418e-bdc1-da5fd15e7b3f" />
+
+
+### Задание B (text_stats.py)
+```python
+import sys
+sys.path.append("C:/Users/Redmi/Desktop/ivt/laboratornie_bivt_25_1-Public/src")
+
+from lib.text import normalize, tokenize, count_freq, top_n
+
+text = sys.stdin.readline()
+
+normalized_text = normalize(text)
+
+tokens = tokenize(normalized_text)
+
+count_words = count_freq(tokens)
+
+top_words = top_n(count_words, 5)
+
+print(f"Всего слов: {len(tokens)}")
+print(f"Уникальных слов: {len(count_words)}")
+print("Топ-5:")
+
+for word, count in top_words:
+    print(f"{word}:{count}")
+```
+<img width="887" height="812" alt="B" src="https://github.com/user-attachments/assets/ff47b729-d04e-4873-a977-62aefe43e0a6" />
