@@ -248,3 +248,69 @@ for word, count in top_words:
     print(f"{word}:{count}")
 ```
 <img width="887" height="812" alt="B" src="https://github.com/user-attachments/assets/ff47b729-d04e-4873-a977-62aefe43e0a6" />
+
+## Лабораторная №4
+### Задание A (io_txt_csv.py)
+```python
+from pathlib import Path
+
+def read_text(path: str | Path, encoding: str = "utf-8") -> str:
+    p = Path(path)
+    if not p.exists():
+        raise FileNotFoundError
+    
+    return p.read_text(encoding=encoding)
+
+import csv
+from pathlib import Path
+from typing import Iterable, Sequence
+
+def write_csv(rows: Iterable[Sequence], path: str | Path, header: tuple[str, ...] | None = None) -> None:
+    p = Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    rows = list(rows)
+
+    with p.open("w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+
+        if header is not None:
+            w.writerow(header)
+        if rows:
+            for r in rows:
+                if len(r) != len(rows[0]):
+                    raise ValueError
+        
+        for r in rows:
+            w.writerow(r)
+```
+
+### Задание B (text_stats.py)
+```python
+import sys
+from pathlib import Path
+sys.path.append("C:/Users/Redmi/Desktop/ivt/laboratornie_bivt_25_1-Public/src")
+from lib.text import normalize, tokenize, count_freq, top_n
+from lab04.io_txt_csv import read_text, write_csv
+
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+sys.path.append(str(PROJECT_ROOT))
+
+input_path = PROJECT_ROOT / "data" / "input.txt"
+output_path = PROJECT_ROOT / "data" / "report.csv"
+p = read_text(input_path)
+norm_p=normalize(p)
+tokens=tokenize(norm_p)
+count_word=count_freq(tokens)
+top=top_n(count_word)
+
+write_csv(top, output_path, ["word", "count"])
+
+print("Всего слов:", len(tokens))
+print("Уникальных слов:", len(count_word))
+print("Топ-5:")
+for x,y in top[:5]:
+    print(f'{x}:{y}')
+```
+<img width="926" height="903" alt="test_A" src="https://github.com/user-attachments/assets/9a9b26ad-06ac-4155-820f-77e4c68dbbe4" />
+<img width="907" height="848" alt="test_B" src="https://github.com/user-attachments/assets/336ec66b-b8ea-48f3-95e1-3b4d7ef20f7c" />
+
