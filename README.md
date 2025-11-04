@@ -314,3 +314,129 @@ for x,y in top[:5]:
 <img width="926" height="903" alt="test_A" src="https://github.com/user-attachments/assets/9a9b26ad-06ac-4155-820f-77e4c68dbbe4" />
 <img width="907" height="848" alt="test_B" src="https://github.com/user-attachments/assets/336ec66b-b8ea-48f3-95e1-3b4d7ef20f7c" />
 
+## Лабораторная №5
+### Функции: 
+### JSON -> CSV 
+```python
+import json
+import csv
+from pathlib import Path
+
+def json_to_csv(json_path: str, csv_path: str) -> None:
+    try:
+        # 1. Читаем JSON
+        with open(json_path, 'r', encoding='utf-8') as json_file:
+            data = json.load(json_file)
+        
+        # 2. Проверяем что это список словарей
+        if not data or not isinstance(data, list):
+            raise ValueError
+        
+        # 3. Получаем все возможные заголовки
+        all_keys = set()
+        for item in data:
+            if not isinstance(item, dict):
+                raise ValueError
+            all_keys.update(item.keys())
+        
+        # 4. Записываем CSV
+        with open(csv_path, 'w', newline='', encoding='utf-8') as csv_file:
+            writer = csv.DictWriter(csv_file, fieldnames=all_keys) #записывает список словарей
+            writer.writeheader()
+            for row in data:
+                # Заполняем отсутствующие поля пустыми строками
+                complete_row = {key: row.get(key, "") for key in all_keys}
+                writer.writerow(complete_row)
+                
+    except FileNotFoundError:
+        raise FileNotFoundError
+```
+### CSV -> JSON
+```python
+import json
+import csv
+from pathlib import Path
+
+def csv_to_json(csv_path: str, json_path: str) -> None:
+    try:
+        # 1. Читаем CSV
+        with open(csv_path, 'r', encoding='utf-8') as csv_file:
+            reader = csv.DictReader(csv_file)
+            data = list(reader)
+        
+        # 2. Проверяем что есть данные
+        if not data:
+            raise ValueError
+        
+        # 3. Записываем JSON
+        with open(json_path, 'w', encoding='utf-8') as json_file:
+            json.dump(data, json_file, ensure_ascii=False, indent=2)
+            
+    except FileNotFoundError:
+        raise FileNotFoundError
+```
+### CSV -> XLSX
+```python
+import csv
+from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+
+def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
+    try:
+        wb = Workbook() #создаем файл в экселе
+        ws = wb.active #создаем активный лист в экселе
+        ws.title = "Sheet1"
+        
+        # Читаем CSV и записываем в XLSX
+        with open(csv_path, 'r', encoding='utf-8') as csv_file:
+            reader = csv.reader(csv_file)
+            for row in reader:
+                ws.append(row)
+        
+        # Настраиваем авто-ширину колонок
+        for column_cells in ws.columns:
+            length = max(len(str(cell.value or "")) for cell in column_cells) #находим самую длинную строку в колонке для ориентира
+            ws.column_dimensions[column_cells[0].column_letter].width = max(length + 2, 8) #column_dimensions - определяет букву столбца, width - присваивает ему ширину (минимум 8, +2 - запасные знаки на пробелы с двух сторон) 
+        
+        wb.save(xlsx_path)
+        
+    except FileNotFoundError:
+        raise FileNotFoundError
+```
+### Программа для теста: 
+```python
+import sys
+import os
+from pathlib import Path
+
+# Добавляем текущую директорию в путь (в начало)
+current_dir = Path(__file__).parent
+sys.path.insert(0, str(current_dir))
+
+# Импортируем напрямую из текущей папки
+from json_csv import json_to_csv, csv_to_json
+from csv_xlsx import csv_to_xlsx
+
+    
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+    
+json_source = PROJECT_ROOT / "data" / "samples" / "people.json"
+csv_source = PROJECT_ROOT / "data" / "samples" / "people.csv"
+        
+output_csv = PROJECT_ROOT / "data" / "out" / "people_from_json.csv"
+output_json = PROJECT_ROOT / "data" / "out" / "people_from_csv.json"
+output_xlsx = PROJECT_ROOT / "data" / "out" / "people.xlsx"
+
+try:
+    json_to_csv(str(json_source), str(output_csv))
+            
+    csv_to_json(str(csv_source), str(output_json))
+
+    csv_to_xlsx(str(csv_source), str(output_xlsx))
+            
+except Exception as e:
+    print(f"Ошибка: {e}")
+```
+### Фото работы: До/После
+<img width="762" height="722" alt="test_start" src="https://github.com/user-attachments/assets/9e816549-aeb7-4981-bd67-a1d80f76e817" />
+<img width="1340" height="1120" alt="test_result" src="https://github.com/user-attachments/assets/1ac6d693-0599-43e1-840b-df67d1e8614d" />
