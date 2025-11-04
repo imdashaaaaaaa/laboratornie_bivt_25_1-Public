@@ -438,5 +438,6 @@ except Exception as e:
     print(f"Ошибка: {e}")
 ```
 ### Фото работы: До/После
-<img width="762" height="722" alt="test_start" src="https://github.com/user-attachments/assets/9e816549-aeb7-4981-bd67-a1d80f76e817" />
-<img width="1340" height="1120" alt="test_result" src="https://github.com/user-attachments/assets/1ac6d693-0599-43e1-840b-df67d1e8614d" />
+<img width="756" height="712" alt="test_start" src="https://github.com/user-attachments/assets/d8d0e5f5-9c94-41dc-8ae9-2185d7643030" />
+<img width="1471" height="1110" alt="test_result" src="https://github.com/user-attachments/assets/47b90fb0-cb06-4ab7-bf6f-8ad3b3cd1adb" />
+
