@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Linnet",
+    "children": "4",
+    "age": "35"
+  },
+  {
+    "name": "Sussan",
+    "children": "1",
+    "age": null
+  },
+  {
+    "name": "Bri",
+    "children": "1",
+    "age": "39"
+  },
+  {
+    "name": "Gabriella",
+    "children": "",
+    "age": "38"
+  }
+]
