@@ -1,22 +1,22 @@
 [
   {
-    "name": "Linnet",
-    "children": "4",
-    "age": "35"
+    "city": "Moscow",
+    "name": "Ivan",
+    "age": "20"
   },
   {
-    "name": "Sussan",
-    "children": "1",
+    "city": "Saint-Petersburg",
+    "name": "Kate",
     "age": ""
   },
   {
-    "name": "Bri",
-    "children": "1",
-    "age": "39"
+    "city": "Yaroslavl",
+    "name": "Rose",
+    "age": "19"
   },
   {
-    "name": "Gabriella",
-    "children": "",
-    "age": "38"
+    "city": "",
+    "name": "Alex",
+    "age": "18"
   }
 ]

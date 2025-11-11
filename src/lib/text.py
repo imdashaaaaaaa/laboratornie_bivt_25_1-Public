@@ -36,13 +36,11 @@ def count_freq(tokens: list[str]) -> dict[str, int]:
 
 
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
-
-    sorted_items = sorted(freq.items(), key=lambda x: (x[0])) #по алфавиту
-    sorted_items = sorted(freq.items(), key=lambda x: (-x[1])) #по количеству в обратном порядке
-
+    # Сначала сортируем по частоте (убывание), потом по алфавиту (возрастание)
+    sorted_items = sorted(freq.items(), key=lambda x: (-x[1], x[0]))
     return sorted_items[:n]
 
-if __name__ == "__main__":
-    print (normalize ("ПрИвЕт\nМИр\t"))
-    print (tokenize ("emoji 😀 не слово"))
-    print (top_n(count_freq(["a","b","a","c","b","a"]), n=2))
+#if __name__ == "__main__":
+#    print (normalize ("ПрИвЕт\nМИр\t"))
+#    print (tokenize ("emoji 😀 не слово"))
+#    print (top_n(count_freq(["a","b","a","c","b","a"]), n=2))
