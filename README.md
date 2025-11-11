@@ -441,3 +441,116 @@ except Exception as e:
 <img width="756" height="712" alt="test_start" src="https://github.com/user-attachments/assets/d8d0e5f5-9c94-41dc-8ae9-2185d7643030" />
 <img width="1471" height="1110" alt="test_result" src="https://github.com/user-attachments/assets/47b90fb0-cb06-4ab7-bf6f-8ad3b3cd1adb" />
 
+
+## Лабораторная №6
+### Подкоманды в одном CLI:
+```python
+import argparse
+from pathlib import Path
+from src.lib.text import tokenize, count_freq, top_n
+
+def main():
+    """
+        1. cat   — вывод содержимого текстового файла (с нумерацией строк при флаге -n);
+        2. stats — анализ частот встречаемости слов в тексте. (с указанием количества слов в топе --top n, иначе автоматически top 5)
+    """
+
+    parser = argparse.ArgumentParser(description="CLI‑утилиты лабораторной №6") #создание парсера с описанием команд
+    subparsers = parser.add_subparsers(dest="command") #dest="command" - значение выбранной команды будет храниться в args.command
+
+    # подкоманда cat
+    cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
+    cat_parser.add_argument("--input", required=True) #required=True - обязательный элемент, хранит в себе путь к файлу
+    cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки") #action="store_true" - флаг, который становится True если указан, иначе False
+
+    # подкоманда stats
+    stats_parser = subparsers.add_parser("stats", help="Частоты слов")
+    stats_parser.add_argument("--input", required=True)
+    stats_parser.add_argument("--top", type=int, default=5) #дополнительный элемент, если его нет - автоматически 5
+
+    args = parser.parse_args() #расшифровывает введенную строку по флагам, указанным ранее
+
+    file=Path(args.input)
+
+    if not file.exists():
+        raise FileNotFoundError("Файл не найден")
+
+
+    if args.command == "cat":
+        #python -m src.lab06.cli_text cat --input data/samples/test.txt -n
+
+        with open(file, "r", encoding="utf-8") as f:
+            num = 1
+            for line in f:
+                line = line.rstrip("\n")
+                if args.n:
+                    print(f"{num}: {line}")
+                    num += 1
+                else:
+                    print(line)
+
+    elif args.command == "stats":
+        #python -m src.lab06.cli_text stats --input data/samples/test.txt --top 3
+
+        with open(file, "r", encoding="utf-8") as f:
+            data = [row for row in f]
+        data = "".join(data)
+    
+        tokens = tokenize(data)
+        freq = count_freq(tokens)
+        top = top_n(freq, args.top)
+    
+        print(f"Топ-{args.top} слов в файле '{args.input}':")
+        number = 1
+        for word, count in top:
+            print(f"{number}. '{word}' - {count} раз")
+            number += 1
+
+if __name__ == "__main__":
+    main()
+```
+<img width="1261" height="639" alt="cli_text_test" src="https://github.com/user-attachments/assets/9aeb62bb-57be-4f06-a5c3-7534c054bae0" />
+
+
+### CLI‑конвертер
+```python
+import argparse
+from src.lab05.json_csv import json_to_csv, csv_to_json
+from src.lab05.csv_xlsx import csv_to_xlsx
+
+def main():
+    parser = argparse.ArgumentParser(description="Конвертеры данных")
+    sub = parser.add_subparsers(dest="cmd")
+
+    json_to_csv_p = sub.add_parser("json2csv")
+    json_to_csv_p.add_argument("--in", dest="input", required=True, help="Входной JSON файл")
+    json_to_csv_p.add_argument("--out", dest="output", required=True, help="Выходной CSV файл")
+
+    csv_to_json_p = sub.add_parser("csv2json")
+    csv_to_json_p.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
+    csv_to_json_p.add_argument("--out", dest="output", required=True, help="Выходной JSON файл")
+
+    csv_to_xlsx_p = sub.add_parser("csv2xlsx")
+    csv_to_xlsx_p.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
+    csv_to_xlsx_p.add_argument("--out", dest="output", required=True, help="Выходной XLSX файл")
+
+    args = parser.parse_args()
+
+    if args.cmd == "json2csv":
+        #python -m src.lab06.cli_convert json2csv --in data/samples/people.json --out data/out/people_from_json.csv
+        json_to_csv(json_path=args.input, csv_path=args.output)
+
+    elif  args.cmd == "csv2json":
+        #python -m src.lab06.cli_convert csv2json --in data/samples/people.csv --out data/out/people_from_csv.json
+        csv_to_json(csv_path=args.input, json_path=args.output)
+
+    elif args.cmd == "csv2xlsx":
+        #python -m src.lab06.cli_convert csv2xlsx --in data/samples/people.csv --out data/out/people.xlsx
+        csv_to_xlsx(csv_path=args.input, xlsx_path=args.output)
+
+if __name__ == "__main__":
+    main()
+```
+<img width="1415" height="711" alt="cli_convert_csv2json" src="https://github.com/user-attachments/assets/f021ff4b-6fcd-4241-9de8-1b3d0293a74a" />
+<img width="1429" height="994" alt="cli_convert_csv2xslx" src="https://github.com/user-attachments/assets/74365074-7a74-421e-8d48-78bae7386158" />
+<img width="1135" height="1042" alt="test_help" src="https://github.com/user-attachments/assets/288ff6d5-491c-470a-804e-af2731501c4d" />
