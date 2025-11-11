@@ -7,16 +7,16 @@ def main():
     sub = parser.add_subparsers(dest="cmd")
 
     json_to_csv_p = sub.add_parser("json2csv")
-    json_to_csv_p.add_argument("--in", dest="input", required=True)
-    json_to_csv_p.add_argument("--out", dest="output", required=True)
+    json_to_csv_p.add_argument("--in", dest="input", required=True, help="Входной JSON файл")
+    json_to_csv_p.add_argument("--out", dest="output", required=True, help="Выходной CSV файл")
 
     csv_to_json_p = sub.add_parser("csv2json")
-    csv_to_json_p.add_argument("--in", dest="input", required=True)
-    csv_to_json_p.add_argument("--out", dest="output", required=True)
+    csv_to_json_p.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
+    csv_to_json_p.add_argument("--out", dest="output", required=True, help="Выходной JSON файл")
 
     csv_to_xlsx_p = sub.add_parser("csv2xlsx")
-    csv_to_xlsx_p.add_argument("--in", dest="input", required=True)
-    csv_to_xlsx_p.add_argument("--out", dest="output", required=True)
+    csv_to_xlsx_p.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
+    csv_to_xlsx_p.add_argument("--out", dest="output", required=True, help="Выходной XLSX файл")
 
     args = parser.parse_args()
 
