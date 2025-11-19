@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append("C:/Users/Redmi/Desktop/ivt/laboratornie_bivt_25_1-Public/src")
 
 from lib.text import normalize, tokenize, count_freq, top_n
