@@ -136,5 +136,5 @@ def test_file_not_exist(tmp_path: Path):
 ```
 =======
 ```
-<img width="1405" height="289" alt="Снимок экрана 2025-11-19 121830" src="https://github.com/user-attachments/assets/49678170-d09e-42a1-be0d-2742d1302d71" />
->>>>>>> 93e318ca96d495f54c53429222447266dafad442
+<img width="1405" height="289" alt="test_json_csv" src="https://github.com/user-attachments/assets/704f873b-93f9-4803-969b-365cbfbee628" />
+
