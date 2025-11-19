@@ -16,7 +16,7 @@ def test_normalize_basic(source, expected):
 
 
 @pytest.mark.parametrize(
-    "source, expected", 
+    "source, expected",
     [
         ("привет мир", ["привет", "мир"]),
         ("мама,папа,сестра!", ["мама", "папа", "сестра"]),
@@ -31,9 +31,12 @@ def test_tokenize_basic(source, expected):
 @pytest.mark.parametrize(
     "source, expected",
     [
-        (["я", "люблю", "python", "я", "люблю", "код"], {"я": 2, "люблю": 2, "python": 1, "код": 1}), 
+        (
+            ["я", "люблю", "python", "я", "люблю", "код"],
+            {"я": 2, "люблю": 2, "python": 1, "код": 1},
+        ),
         (["один", "два", "три"], {"один": 1, "два": 1, "три": 1}),
-        (["lala", "la", "lala", "lalala", "lala"], {"lala": 3, "la": 1, "lalala": 1}), 
+        (["lala", "la", "lala", "lalala", "lala"], {"lala": 3, "la": 1, "lalala": 1}),
     ],
 )
 def test_count_freq_and_top_n(source, expected):
