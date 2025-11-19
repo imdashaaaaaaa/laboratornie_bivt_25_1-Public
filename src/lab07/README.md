@@ -56,6 +56,8 @@ def test_top_n_tie_breaker(source, n, expected):
     assert top_n(source, n) == expected
 ```
 
+<img width="1396" height="376" alt="test_text" src="https://github.com/user-attachments/assets/4b9f434f-0615-460f-a3ad-f59c0d885694" />
+
 
 python -m pytest tests/test_json_csv.py
 
@@ -134,5 +136,5 @@ def test_file_not_exist(tmp_path: Path):
 ```
 =======
 ```
-<img width="1405" height="289" alt="Снимок экрана 2025-11-19 121830" src="https://github.com/user-attachments/assets/49678170-d09e-42a1-be0d-2742d1302d71" />
->>>>>>> 93e318ca96d495f54c53429222447266dafad442
+<img width="1405" height="289" alt="test_json_csv" src="https://github.com/user-attachments/assets/704f873b-93f9-4803-969b-365cbfbee628" />
+
