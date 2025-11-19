@@ -56,6 +56,8 @@ def test_top_n_tie_breaker(source, n, expected):
     assert top_n(source, n) == expected
 ```
 
+<img width="1396" height="376" alt="test_text" src="https://github.com/user-attachments/assets/4b9f434f-0615-460f-a3ad-f59c0d885694" />
+
 
 python -m pytest tests/test_json_csv.py
 
