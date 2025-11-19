@@ -130,4 +130,9 @@ def test_file_not_exist(tmp_path: Path):
 
 ##with pytest.raises(ОжидаемоеИсключение):
    ## код_который_должен_выбросить_исключение
+<<<<<<< HEAD
 ```
+=======
+```
+<img width="1405" height="289" alt="Снимок экрана 2025-11-19 121830" src="https://github.com/user-attachments/assets/49678170-d09e-42a1-be0d-2742d1302d71" />
+>>>>>>> 93e318ca96d495f54c53429222447266dafad442
