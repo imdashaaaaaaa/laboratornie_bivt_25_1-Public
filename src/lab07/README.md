@@ -138,3 +138,6 @@ def test_file_not_exist(tmp_path: Path):
 ```
 <img width="1405" height="289" alt="test_json_csv" src="https://github.com/user-attachments/assets/704f873b-93f9-4803-969b-365cbfbee628" />
 
+black_test
+<img width="870" height="372" alt="Снимок экрана 2025-11-19 160447" src="https://github.com/user-attachments/assets/dca92ff1-bbf2-4614-9c91-275ae1bf3d42" />
+
