@@ -59,7 +59,7 @@ class Student:
         )
 ```
 
-### тестирование
+### Тестирование
 ```python
 if __name__ == "__main__":
     student = Student("Королева Дарья Михайловна", "2006-09-26", "БИВТ-25-1", 5.0)
@@ -122,3 +122,4 @@ if __name__ == "__main__":
     test_serialization()
 ```
 <img width="787" height="818" alt="test_serialize" src="https://github.com/user-attachments/assets/617cc0e7-88d4-46e0-a178-cadbb6bfa792" />
+
