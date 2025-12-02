@@ -555,9 +555,8 @@ if __name__ == "__main__":
 <img width="1429" height="994" alt="cli_convert_csv2xslx" src="https://github.com/user-attachments/assets/74365074-7a74-421e-8d48-78bae7386158" />
 <img width="1135" height="1042" alt="test_help" src="https://github.com/user-attachments/assets/288ff6d5-491c-470a-804e-af2731501c4d" />
 
-##Лабораторная №7
-##python -m pytest tests/test_text.py
-Строка для запуска в CLI из корня папки
+## Лабораторная №7
+## python -m pytest tests/test_text.py (Строка для запуска в CLI из корня папки)
 
 ```python
 import pytest
@@ -653,7 +652,7 @@ def test_json_to_csv_empty_raises(tmp_path: Path):
         json_to_csv(str(src), str(dst))
 
 
-##Негативный сценари: JSON не список (некорректно записан) → ожидаем ValueError
+##Негативный сценарий: JSON не список (некорректно записан) → ожидаем ValueError
 def test_json_to_csv_invalid_json(self, tmp_path: Path):
     src = tmp_path / "invalid.json"
     dst = tmp_path / "out.csv"
@@ -687,16 +686,13 @@ def test_file_not_exist(tmp_path: Path):
     with pytest.raises(FileNotFoundError):
         csv_to_json("nope.csv", "out.json") #пытаемся прочитать несуществующий файл
 
-
 ##with pytest.raises(ОжидаемоеИсключение):
    ## код_который_должен_выбросить_исключение
 <<<<<<< HEAD
 ```
-=======
-```
 <img width="1405" height="289" alt="test_json_csv" src="https://github.com/user-attachments/assets/704f873b-93f9-4803-969b-365cbfbee628" />
 
-##black_test
+### black_test
 <img width="870" height="372" alt="Снимок экрана 2025-11-19 160447" src="https://github.com/user-attachments/assets/dca92ff1-bbf2-4614-9c91-275ae1bf3d42" />
 
 
