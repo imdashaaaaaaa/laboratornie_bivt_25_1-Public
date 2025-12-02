@@ -819,3 +819,4 @@ def test_serialization():
 if __name__ == "__main__":
     test_serialization()
 ```
+<img width="787" height="818" alt="test_serialize" src="https://github.com/user-attachments/assets/617cc0e7-88d4-46e0-a178-cadbb6bfa792" />
