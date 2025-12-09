@@ -976,3 +976,290 @@ if __name__ == "__main__":
     main()
 ```
 <img width="458" height="958" alt="test_lab09" src="https://github.com/user-attachments/assets/85af35d6-8e8b-42d6-aa77-5dcaf6d453f5" />
+
+## Лабораторная №10
+### Structures.py
+```python
+from collections import deque
+
+class Stack:
+    """Стек (LIFO-Last In First Out) на основе списка"""
+    
+    def __init__(self):
+        """Внутреннее хранилище стека"""
+        self._data = []
+    
+    def push(self, item):
+        """Добавить элемент на вершину стека (в конец) O(1)"""
+        self._data.append(item)
+    
+    def pop(self):
+        """Снять верхний элемент и вернуть его (удалить из стека) O(1)"""
+        if self.is_empty():
+            raise IndexError("Нельзя удалить из пустого стека")
+        return self._data.pop() ## pop() - удаляет с конца, pop(0) - удаляет с начала
+    
+    def peek(self):
+        """Вернуть верхний элемент без удаления. O(1)"""
+        if self.is_empty():
+            return None
+        return self._data[-1]
+    
+    def is_empty(self):
+        """Проверить, пуст ли стек. O(1)"""
+        return len(self._data) == 0
+    
+    def __len__(self):
+        """Количество элементов в стеке. O(1)"""
+        return len(self._data)
+    
+    def __repr__(self):
+        return f"Stack({self._data})"
+
+
+class Queue:
+    """Очередь (FIFO-First In First Out)"""
+    
+    def __init__(self):
+        self._data = deque()
+    
+    def enqueue(self, item):
+        """Добавить элемент в конец очереди. O(1)"""
+        self._data.append(item)
+    
+    def dequeue(self):
+        """Взять элемент из начала очереди и удалить. O(1)"""
+        if self.is_empty():
+            raise IndexError("Нельзя удалить из пустой очереди")
+        return self._data.popleft()
+    
+    def peek(self):
+        """Вернуть первый элемент без удаления. O(1)"""
+        if self.is_empty():
+            return None
+        return self._data[0]
+    
+    def is_empty(self):
+        """Проверить, пуста ли очередь. O(1)"""
+        return len(self._data) == 0
+    
+    def __len__(self):
+        """Количество элементов в очереди. O(1)"""
+        return len(self._data)
+    
+    def __repr__(self):
+        return f"Queue({list(self._data)})"
+```
+### Тестирование 
+```python
+from src.lab10.structures import Stack, Queue
+
+print("=== Тест Stack ===")
+s = Stack()
+
+# Проверяем пустой стек
+print("1. Пустой стек:")
+print(f"   is_empty = {s.is_empty()}")  # True
+print(f"   peek = {s.peek()}")          # None
+
+# Добавляем элементы
+print("\n2. Добавляем 1, 2, 3:")
+s.push(1)
+s.push(2)
+s.push(3)
+print(f"   Стек: {s}")
+print(f"   Длина: {len(s)}")            # 3
+print(f"   peek = {s.peek()}")          # 3
+
+# Удаляем элементы
+print("\n3. Удаляем элементы:")
+print(f"   pop = {s.pop()}")            # 3
+print(f"   pop = {s.pop()}")            # 2
+print(f"   Осталось: {s}")
+
+# Проверяем ошибку
+print("\n4. Проверка ошибки:")
+s.pop()  # удаляем последний
+try:
+    s.pop()
+except IndexError as e:
+    print(f"   Ошибка при pop из пустого стека: {e}")
+
+print("=== Тест Queue ===")
+q = Queue()
+
+# Проверяем пустую очередь
+print("1. Пустая очередь:")
+print(f"   is_empty = {q.is_empty()}")  # True
+print(f"   peek = {q.peek()}")          # None
+
+# Добавляем элементы
+print("\n2. Добавляем 'a', 'b', 'c':")
+q.enqueue('a')
+q.enqueue('b')
+q.enqueue('c')
+print(f"   Очередь: {q}")
+print(f"   Длина: {len(q)}")            # 3
+print(f"   peek = {q.peek()}")          # 'a'
+
+# Удаляем элементы
+print("\n3. Удаляем элементы:")
+print(f"   dequeue = {q.dequeue()}")    # 'a'
+print(f"   dequeue = {q.dequeue()}")    # 'b'
+print(f"   Осталось: {q}")
+
+# Еще раз проверяем peek и is_empty
+print("\n4. Проверяем состояние:")
+q.enqueue('d')
+print(f"   Добавили 'd': {q}")
+print(f"   peek = {q.peek()}")          # 'c'
+print(f"   is_empty = {q.is_empty()}")  # False
+
+# Проверяем ошибку
+print("\n5. Проверка ошибки:")
+q.dequeue()  # 'c'
+q.dequeue()  # 'd'
+try:
+    q.dequeue()
+except IndexError as e:
+    print(f"   Ошибка при dequeue из пустой очереди: {e}")
+
+```
+<img width="703" height="914" alt="test_structures" src="https://github.com/user-attachments/assets/8120cbb9-a6e0-48a8-a9a8-66f7fd28d0ac" />
+
+### Linked_list.py
+```python
+class Node:
+    def __init__(self, value, next=None):
+        self.value = value
+        self.next = next
+
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        # размер начинается с 0
+        self._size = 0
+
+    def append(self, value):
+        """Добавить элемент в конец списка O(n)"""
+        new_node = Node(value)
+        
+        if self.head is None:
+            self.head = self.tail = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+        
+        self._size += 1
+
+    def prepend(self, value):
+        """Добавить элемент в начало списка O(1)"""
+        # Создаем новый узел, который указывает на текущую голову
+        new_node = Node(value, next=self.head)
+        if self._size == 0:
+            self.tail = new_node
+        self.head = new_node
+        self._size += 1
+
+    def insert(self, idx, value):
+        """Вставка по индексу O(n)"""
+        # Проверяем, что индекс в допустимых пределах
+        if idx < 0 or idx > self._size:
+            raise IndexError(f"Index {idx} out of range [0, {self._size}]")
+        
+        # Если вставляем в начало
+        if idx == 0:
+            self.prepend(value)
+            return
+        
+        if idx == self._size:
+            self.append(value)
+            return
+        
+        # Ищем позицию для вставки
+        current = self.head
+        # Переходим к узлу перед нужной позицией
+        for _ in range(idx - 1):
+            current = current.next
+        
+        # Вставляем новый узел
+        new_node = Node(value, next=current.next)
+        current.next = new_node
+        
+        # ИСПРАВЛЕНО: увеличиваем размер
+        self._size += 1
+
+    def __iter__(self):
+        """Итератор по значениям списка"""
+        current = self.head
+        while current is not None:
+            yield current.value
+            current = current.next
+
+    def __len__(self):
+        """Возвращает количество элементов O(1)"""
+        return self._size
+
+    def __repr__(self):
+        """Строковое представление списка"""
+        values = list(self)
+        return f"SinglyLinkedList({values})"
+```
+### Тестирование 
+```python
+from src.lab10.linked_list import SinglyLinkedList
+
+print("=== Тест SinglyLinkedList ===")
+lst = SinglyLinkedList()
+
+# Проверяем пустой список
+print("1. Пустой список:")
+print(f"   Список: {lst}")
+print(f"   Длина: {len(lst)}")          # 0
+
+# Добавляем в конец
+print("\n2. Добавляем в конец (append):")
+lst.append(10)
+lst.append(20)
+lst.append(30)
+print(f"   После append: {lst}")
+print(f"   Длина: {len(lst)}")          # 3
+
+# Добавляем в начало
+print("\n3. Добавляем в начало (prepend):")
+lst.prepend(5)
+print(f"   После prepend(5): {lst}")
+
+# Вставляем по индексу
+print("\n4. Вставляем по индексу (insert):")
+lst.insert(2, 15)
+print(f"   После insert(2, 15): {lst}")
+
+# Проверяем итерацию
+print("\n5. Проверяем цикл for:")
+print("   Элементы:", end=" ")
+for x in lst:
+    print(x, end=" ")
+print()
+
+# Проверяем граничные случаи
+print("\n6. Граничные случаи:")
+lst.insert(0, 1)      # в начало
+lst.insert(len(lst), 100)  # в конец
+print(f"   После insert в начало и конец: {lst}")
+
+# Проверяем ошибки
+print("\n7. Проверяем ошибки:")
+try:
+    lst.insert(-5, 999)
+except IndexError as e:
+    print(f"   Ошибка при insert(-5): {e}")
+
+try:
+    lst.insert(100, 100)
+except IndexError as e:
+    print(f"   Ошибка при insert(100): {e}")
+```
+<img width="741" height="566" alt="test_linked_list" src="https://github.com/user-attachments/assets/6e7f1313-dd2b-4ae9-b007-a54eed15a57d" />
